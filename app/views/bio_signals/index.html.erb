@@ -1,0 +1,21 @@
+<h1>Listing bio_signals</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bio_signals.each do |bio_signal| %>
+  <tr>
+    <td><%= link_to 'Show', bio_signal %></td>
+    <td><%= link_to 'Edit', edit_bio_signal_path(bio_signal) %></td>
+    <td><%= link_to 'Destroy', bio_signal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bio signal', new_bio_signal_path %>

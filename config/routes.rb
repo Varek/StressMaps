@@ -1,4 +1,10 @@
 StressMaps::Application.routes.draw do
+  resources :bio_signals
+
+  resources :employees
+
+  resources :companies
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

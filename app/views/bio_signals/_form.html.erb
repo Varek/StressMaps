@@ -1,0 +1,17 @@
+<%= form_for(@bio_signal) do |f| %>
+  <% if @bio_signal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bio_signal.errors.count, "error") %> prohibited this bio_signal from being saved:</h2>
+
+      <ul>
+      <% @bio_signal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
