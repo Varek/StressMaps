@@ -14,13 +14,18 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     @company = Company.find(params[:id])
-
+    employees_and_bio_signals
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @company }
     end
   end
 
+  def employees
+    @company = Company.find(params[:id])
+    employees_and_bio_signals(params[:date]||'2012-11-1')
+    render json: @employees
+  end
   # GET /companies/new
   # GET /companies/new.json
   def new
@@ -79,5 +84,24 @@ class CompaniesController < ApplicationController
       format.html { redirect_to companies_url }
       format.json { head :no_content }
     end
+  end
+
+  def employees_and_bio_signals(date='2012-11-1')
+    @employees = @company.employees
+    #DateTime.parse('2012-10-18')
+    date = DateTime.parse(date)
+    @bio_signals = {}
+    @start_time = DateTime.now
+    @end_time = DateTime.new
+    @employees.each do |employee|
+      bio_signals = BioSignal.where(:employee_id => employee.id, :created_at => {:$gt => date.to_time, :$lt => (date + 23.hours + 59.minutes + 59.seconds).to_time})
+      if bio_signals.present?
+        @bio_signals[employee.id] = bio_signals
+        bso = bio_signals.order('created_at ASC')
+        @start_time = bso.first.created_at if bso.first && @start_time > bso.first.created_at
+        @end_time = bso.last.created_at  if bso.last && @end_time < bso.last.created_at
+      end
+    end
+    @employees.select! {|e| @bio_signals.keys.include?(e.id)}
   end
 end

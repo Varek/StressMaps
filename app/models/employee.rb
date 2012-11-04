@@ -15,7 +15,7 @@ class Employee
 
   many :bio_signals
 
-  ensure_index [[:location,'2d']]
+  #ensure_index [[:location,'2d']]
 
   def location_lon
     location[1]

@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
+<div id="mapContainer" style="height:800px;"></div>
+
+<%= content_tag 'div','', {:id => 'company', :data => {:id => @company.id,:area_0_lat =>@company.area[0][0],:area_0_lon =>@company.area[0][1],:area_1_lat =>@company.area[1][0],:area_1_lon =>@company.area[1][1]}}, true %>
+
+<%= render 'employees'%>
 
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%#= link_to 'Edit', edit_company_path(@company) %>
+<%#= link_to 'Back', companies_path %>
+
+<%= link_to 'Back', '#back', :class => 'time_travel', :id => 'back' %> |
+<%= link_to 'Next', '#next', :class => 'time_travel', :id => 'next' %>

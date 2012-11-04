@@ -1,14 +1,15 @@
 class BioSignal
-  include MongoMapper::EmbedDocument
+  include MongoMapper::Document
 
 
-  key :stress_level, Integer
-  key :heart_rate, Integer
+  key :stress_level, Float
+  key :heart_rate, Float
 
   key :location, Array
   timestamps!
 
-  ensure_index [[:location,'2d']]
+  belongs_to :employee
+  #ensure_index [[:location,'2d']]
 
 
 end

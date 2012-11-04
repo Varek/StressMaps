@@ -9,6 +9,6 @@ class Company
 
   many :employees
 
-  ensure_index [[:area,'2d']]
+  #ensure_index [[:area,'2d']]
 
 end

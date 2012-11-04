@@ -1,9 +1,13 @@
 StressMaps::Application.routes.draw do
-  resources :bio_signals
+  #resources :bio_signals
 
   resources :employees
 
-  resources :companies
+  resources :companies do
+    member do
+      get :employees
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,7 +58,7 @@ StressMaps::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'companies#index'
 
   # See how all your routes lay out with "rake routes"
 

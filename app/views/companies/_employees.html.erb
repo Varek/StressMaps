@@ -1,0 +1,13 @@
+<div id='employees'>
+  <% @employees.each do |employee|%>
+    <%= content_tag 'div', {:class => 'employee', :data => employee.attributes.except('updated_at','created_at', 'name', '_id').merge({:id => employee.id})} do %>
+      <% @bio_signals[employee.id].each do |bio_signal|%>
+        <%= content_tag 'div', '',{:class => 'bio_signal', :data => bio_signal.attributes.except('updated_at','created_at', '_id').merge({:id => bio_signal.id, :created_at => bio_signal.created_at.to_i})} %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= hidden_field_tag 'start_time', @start_time.to_i%>
+<%= hidden_field_tag 'end_time', @end_time.to_i%>
+<%= hidden_field_tag 'current_time', @start_time.to_i%>
