@@ -49,15 +49,8 @@ drawHeatMap = (map,employees,timestamp) ->
   map.overlays.clear()
   markersContainer.objects.clear()
   currentTime = $('#current_time').val()
-  filterDepartment = $('#filter_department :selected').text()
   rawBioSignals = $('.bio_signal').filter( ->
-    time = parseInt($(this).data("created-at")) == parseInt(currentTime)
-    #if filterDepartment
-    #  department = $(this).data("department") == filterDepartment
-    #else
-    #  department = true
-    #time && department
-    time)
+    parseInt($(this).data("created-at")) == parseInt(currentTime))
   bioSignals = (createBioSignalData(bioSignal,markersContainer) for bioSignal in rawBioSignals)
   #heatMapDataSet = bioSignals#[{latitude: 37.483542, longitude: -122.148977, value: 5.3},{latitude: 37.484542, longitude: -122.149977, value: 12.3},{latitude: 37.483542, longitude: -122.149977, value: 3.3}]#locationsToHeatMapData(movement[timestamp]);
   heatmapProvider = new nokia.maps.heatmap.Overlay({
@@ -89,7 +82,7 @@ time_travel = (map) ->
   $('.time_travel').click( ->
     currentTime = $('#current_time').val()
     if $(this).attr('id','next')
-      $('#current_time').val(currentTime+600)
+      $('#current_time').val(parseInt(currentTime)+600)
     else
-      $('#current_time').val(currentTime-600)
+      $('#current_time').val(parseInt(currentTime)-600)
     drawHeatMap(map,[],undefined))
