@@ -94,7 +94,7 @@ class CompaniesController < ApplicationController
     @start_time = DateTime.now
     @end_time = DateTime.new
     @employees.each do |employee|
-      bio_signals = BioSignal.where(:employee_id => employee.id, :created_at => {:$gt => date.to_time, :$lt => (date + 23.hours + 59.minutes + 59.seconds).to_time})
+      bio_signals = BioSignal.where(:employee_id => employee.id, :created_at => {:$gt => (date + 8.hours).to_time, :$lt => (date + 13.hours + 59.minutes + 59.seconds).to_time})
       if bio_signals.present?
         @bio_signals[employee.id] = bio_signals
         bso = bio_signals.order('created_at ASC')

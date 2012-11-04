@@ -49,8 +49,15 @@ drawHeatMap = (map,employees,timestamp) ->
   map.overlays.clear()
   markersContainer.objects.clear()
   currentTime = $('#current_time').val()
+  filterDepartment = $('#filter_department :selected').text()
   rawBioSignals = $('.bio_signal').filter( ->
-    parseInt($(this).data("created-at")) == parseInt(currentTime))
+    time = parseInt($(this).data("created-at")) == parseInt(currentTime)
+    #if filterDepartment
+    #  department = $(this).data("department") == filterDepartment
+    #else
+    #  department = true
+    #time && department
+    time)
   bioSignals = (createBioSignalData(bioSignal,markersContainer) for bioSignal in rawBioSignals)
   #heatMapDataSet = bioSignals#[{latitude: 37.483542, longitude: -122.148977, value: 5.3},{latitude: 37.484542, longitude: -122.149977, value: 12.3},{latitude: 37.483542, longitude: -122.149977, value: 3.3}]#locationsToHeatMapData(movement[timestamp]);
   heatmapProvider = new nokia.maps.heatmap.Overlay({
@@ -75,7 +82,7 @@ createBioSignalData = (rawBioSignal) ->
  location = $(rawBioSignal).data('location')
  stress = $(rawBioSignal).data('stress-level')
  databs = {latitude: location[0], longitude: location[1], value: stress}
- markersContainer.objects.add(new nokia.maps.map.StandardMarker(databs)) if stress > 6.0
+ markersContainer.objects.add(new nokia.maps.map.StandardMarker(databs)) if stress > 9.0
  return databs
 
 time_travel = (map) ->
