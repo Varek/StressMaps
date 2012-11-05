@@ -62,6 +62,5 @@ selectable_departments =[["Administration",0], ["Finance/Accounting",1], ["Produ
     end
     bs = BioSignal.new(:location => location, :stress_level => (SecureRandom.random_number * (10.0 - modifier)).round(2), :created_at => time, :employee_id => employee.id)
     bs.save
-    puts bs.inspect
   end
 end
