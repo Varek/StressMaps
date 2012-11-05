@@ -2,11 +2,12 @@
 <div id="mapContainer" style="width:800px; height:600px; float:left"></div>
 
 <div id="sidebar" style="float:right; margin:20px">
-  <h1>Stress Busters</h1>
+  <h1>Stress Buster</h1>
   <h2><%= @company.name%></h2>
+  <h3>Stress on Thursday, 1. November 2012</h3>
   <%= link_to 'Back', '#back', :class => 'time_travel', :id => 'back' %> |
   <%= link_to 'Next', '#next', :class => 'time_travel', :id => 'next' %><br>
-  Filter by department: <%#= select_tag 'filter_department', @company.departments.keys, :include_blank => true %>
+  Filter by department: <%= select_tag 'filter_department', options_for_select(@company.departments.keys), :include_blank => true %>
 </div>
 
 <%= content_tag 'div','', {:id => 'company', :data => {:id => @company.id,:area_0_lat =>@company.area[0][0],:area_0_lon =>@company.area[0][1],:area_1_lat =>@company.area[1][0],:area_1_lon =>@company.area[1][1]}}, true %>
